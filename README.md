@@ -3,7 +3,10 @@
 
 ## React + Vite
 
+- Vite
 - Tailwind for styling
+- Header
+- Login
 
 
 ## Features
