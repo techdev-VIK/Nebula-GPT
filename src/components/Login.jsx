@@ -1,6 +1,11 @@
+import { useState } from "react";
 import Header from "./Header";
 
 const Login = () => {
+
+    const [isSignUp, setIsSignUp] = useState(false);
+
+
   return (
     <div>
       <Header />
@@ -29,21 +34,43 @@ const Login = () => {
           </div>
 
           {/* Form */}
-          <form className="bg-black bg-opacity-60 p-8 md:p-10 rounded-lg flex flex-col w-full max-w-md space-y-4">
+          <div className="bg-black/50 p-8 md:p-10 rounded-lg text-white">
+          <form className="flex flex-col w-full max-w-md space-y-6">
+            <h2 className="text-4xl">{isSignUp ? "Sign Up" : "Sign In"}</h2>
             <input
               type="email"
               placeholder="Email Address"
-              className="p-3 rounded bg-gray-800 text-white focus:outline-none"
+              className="p-4 rounded bg-gray-800"
             />
             <input
               type="password"
               placeholder="Password"
-              className="p-3 rounded bg-gray-800 text-white focus:outline-none"
+              className="p-4 rounded bg-gray-800"
             />
-            <button className="bg-red-600 hover:bg-red-700 text-white py-3 rounded font-semibold w-1/2 mx-auto my-5">
-              Sign Up
+            <button className="bg-red-600 hover:bg-red-700 py-3 rounded-lg font-semibold w-full mx-auto my-5">
+            {isSignUp ? "Sign Up" : "Sign In"}
             </button>
           </form>
+
+          {!isSignUp && <div className="my-5">
+            <p className="text-white text-sm">
+              <span className="cursor-pointer" onClick={() => setIsSignUp(true)}>New User? Sign Up Here</span>
+            </p>
+          </div>}
+
+          {isSignUp && <div className="my-5">
+            <p className="text-white text-sm" onClick={() => setIsSignUp(false)}>
+                <span className="cursor-pointer">Already have an account? Sign In</span>{" "}              
+            </p>
+          </div>}
+
+          <div>
+            <p className="text-white text-sm">
+              This page is protected by Google reCAPTCHA to ensure you're not a
+              bot.
+            </p>
+          </div>
+        </div>
         </div>
       </div>
     </div>

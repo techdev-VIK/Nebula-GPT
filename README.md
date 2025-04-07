@@ -7,6 +7,7 @@
 - Tailwind for styling
 - Header
 - Login
+- Sign Up
 
 
 ## Features
