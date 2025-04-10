@@ -8,6 +8,10 @@
 - Header
 - Login
 - Sign Up
+- Routing
+- Form Validation
+- useRef Hook
+
 
 
 ## Features

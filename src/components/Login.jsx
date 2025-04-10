@@ -1,9 +1,29 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Header from "./Header";
+
+import { checkValidation } from "../utils/validation";
 
 const Login = () => {
 
     const [isSignUp, setIsSignUp] = useState(false);
+
+
+    const email = useRef(null);
+    const password = useRef(null);
+
+
+    const handleSubmit = (e) => {
+
+        e.preventDefault();
+
+
+        console.log(email.current.value);
+        console.log(password.current.value);
+
+        const messsage = checkValidation(email.current.value, password.current.value);
+
+        console.log(messsage);
+    }
 
 
   return (
@@ -35,7 +55,8 @@ const Login = () => {
 
           {/* Form */}
           <div className="bg-black/50 p-8 md:p-10 rounded-lg text-white">
-          <form className="flex flex-col w-full max-w-md space-y-6">
+
+          <form onSubmit={handleSubmit} className="flex flex-col w-full max-w-md space-y-6">
             <h2 className="text-4xl">{isSignUp ? "Sign Up" : "Sign In"}</h2>
 
             {isSignUp && <input
@@ -45,11 +66,13 @@ const Login = () => {
             />}
 
             <input
+              ref={email}
               type="email"
               placeholder="Email Address"
               className="p-4 rounded bg-gray-800"
             />
             <input
+              ref={password}
               type="password"
               placeholder="Password"
               className="p-4 rounded bg-gray-800"
