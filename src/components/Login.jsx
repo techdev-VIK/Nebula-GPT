@@ -37,6 +37,13 @@ const Login = () => {
           <div className="bg-black/50 p-8 md:p-10 rounded-lg text-white">
           <form className="flex flex-col w-full max-w-md space-y-6">
             <h2 className="text-4xl">{isSignUp ? "Sign Up" : "Sign In"}</h2>
+
+            {isSignUp && <input
+              type="text"
+              placeholder="Full Name"
+              className="p-4 rounded bg-gray-800"
+            />}
+
             <input
               type="email"
               placeholder="Email Address"
