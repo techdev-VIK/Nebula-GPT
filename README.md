@@ -11,6 +11,8 @@
 - Routing
 - Form Validation
 - useRef Hook
+- Firebase Setup
+- Deploy app in Prod
 
 
 
