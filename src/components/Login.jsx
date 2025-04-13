@@ -1,7 +1,12 @@
 import { useRef, useState } from "react";
 import Header from "./Header";
 
+import {createUserWithEmailAndPassword} from 'firebase/auth';
+
+import { auth } from "../utils/firebase";
+
 import { checkValidation } from "../utils/validation";
+
 
 const Login = () => {
 
@@ -22,9 +27,27 @@ const Login = () => {
 
         const message = checkValidation(email.current.value, password.current.value);
 
-        setErrorMessage(message)
+        setErrorMessage(message);
+
+        if(message) return;
 
         // console.log(messsage);
+
+
+        if(isSignUp){
+          createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log(user);
+
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMsg = error.message;
+
+          setErrorMessage(errorCode + " " + errorMsg)
+        }) 
+        }
     }
 
 
@@ -37,7 +60,7 @@ const Login = () => {
         <img
           src="https://assets.nflxext.com/ffe/siteui/vlv3/98df3030-1c2b-4bd1-a2f5-13c611857edb/web/IN-en-20250331-TRIFECTA-perspective_247b6f06-c36d-4dff-a8eb-4013325c3f8e_large.jpg"
           alt="background-img"
-          className="w-full object-cover"
+          className="w-full h-screen object-cover"
         />
 
         {/* Dark overlay */}
