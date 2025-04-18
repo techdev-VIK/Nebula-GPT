@@ -1,11 +1,14 @@
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 
 const Header = () => {
 
   const navigate = useNavigate();
+
+  const user = useSelector((store) => store.user);
 
   const handleSignOut = () => {
     signOut(auth).then(() => {
@@ -21,7 +24,12 @@ const Header = () => {
     <h1 className="text-red-600 text-5xl font-extrabold tracking-tight p-4">
       NEBULA
     </h1>
-    <button onClick={handleSignOut} className="text-white p-4 mt-3">Sign Out ↡</button>
+    
+    {user && 
+    <div className="flex p-2">
+    <img className="w-12 h-12 mt-4" src={user.photoURL} alt="" />
+    <button onClick={handleSignOut} className="text-white p-2 mt-3">Sign Out ↡</button>  
+    </div>}
     </div>
   );
 }
