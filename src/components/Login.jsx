@@ -58,7 +58,7 @@ const Login = () => {
                       dispatch(addUser({uid: uid, email: email, displayName: displayName, photoURL:photoURL}));
             
           })
-          navigate('/browse');
+          // navigate('/browse');
         })
         .catch((error) => {
           const errorCode = error.code;

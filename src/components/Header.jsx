@@ -1,24 +1,54 @@
-import { signOut } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { addUser, removeUser } from "../utils/userSlice";
 
 
 const Header = () => {
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const user = useSelector((store) => store.user);
 
   const handleSignOut = () => {
     signOut(auth).then(() => {
       //sign out
-      navigate('/');
+      
     }).catch((error) => {
       //error
       navigate('/error')
     })
   }
+
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/auth.user
+
+        // const uid = user.uid;
+
+        const {uid, email, displayName, photoURL} = user;
+        dispatch(addUser({uid: uid, email: email, displayName: displayName, photoURL}));
+
+        // ...
+        navigate('/browse');
+      } else {
+        // User is signed out
+        // ...
+        
+        dispatch(removeUser());
+
+        navigate('/');
+      }
+    });
+   }, [])
+
+
   return (
     <div className="bg-gradient-to-r from-black to-red-900 flex justify-between">
     <h1 className="text-red-600 text-5xl font-extrabold tracking-tight p-4">
