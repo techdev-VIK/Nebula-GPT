@@ -6,7 +6,6 @@ import {createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfil
 import { auth } from "../utils/firebase";
 
 import { checkValidation } from "../utils/validation";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 
@@ -15,7 +14,6 @@ const Login = () => {
 
     const [isSignUp, setIsSignUp] = useState(false);
 
-    const navigate = useNavigate();
 
     const dispatch = useDispatch();
 
@@ -58,7 +56,6 @@ const Login = () => {
                       dispatch(addUser({uid: uid, email: email, displayName: displayName, photoURL:photoURL}));
             
           })
-          // navigate('/browse');
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -74,14 +71,10 @@ const Login = () => {
           .then((userCredential) => {
             // Signed in 
             const user = userCredential.user;
-            console.log(user)
-            navigate('/browse');
+            // console.log(user)
           })
           .catch((error) => {
-            const errorCode = error.code;
-            const errorMsg = error.message;
-            setErrorMessage(errorCode + " " + errorMsg)
-
+            setErrorMessage("Invalid username or password.")
           });
         }
     }
