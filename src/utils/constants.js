@@ -10,3 +10,6 @@ export const API_Options = {
 //     .then(res => res.json())
 //     .then(res => console.log(res))
 //     .catch(err => console.error(err));
+
+
+export const imageCDN_URL = "https://image.tmdb.org/t/p/w200";

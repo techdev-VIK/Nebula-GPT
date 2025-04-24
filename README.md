@@ -32,6 +32,12 @@
 - Embedded the Youtube Video
 - Make it autoplay and mute and hide controls
 - Tailwind to create gradient and view like Netflix
+- Secondary Component
+    MovieList - Popular
+        MovieCards*n
+    MovieList - Trending
+    MovieList - Upcoming
+
 
 
 
