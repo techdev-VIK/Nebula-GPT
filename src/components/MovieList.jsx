@@ -4,11 +4,11 @@ import MovieCard from "./MovieCard";
 const MovieList = ({title, movies}) => {
 
 
-    console.log(movies);
+    // console.log(movies);
 
     return(
-        <div className="pt-4">
-            <h2 className="text-3xl py-6">{title}</h2>
+        <div className="px-4">
+            <h2 className="text-2xl py-4 text-white">{title}</h2>
             <div className="flex overflow-x-scroll">
                 
                 <div className="flex">
