@@ -40,10 +40,12 @@
 - Build Movie Card
 - Get Image CDN Url from API
 - Made the browse page with Tailwind
+- custom hook for nowPlaying movies
 - custom hook for popular movies
-- custom hook for horror movies
+- custom hook for TopRated movies
 - custom hook for trending movies
 - Fixed the UI issues
+
 
 
 
