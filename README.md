@@ -46,7 +46,7 @@
 - custom hook for trending movies
 - Fixed the UI issues
 
-
+- GPT Search button on Header
 
 
 

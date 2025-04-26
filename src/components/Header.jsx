@@ -61,8 +61,12 @@ const Header = () => {
     
     {user && 
     <div className="flex p-2">
-    <img className="w-12 h-12 mt-4" src={user.photoURL} alt="" />
-    <button onClick={handleSignOut} className="text-white p-2 mt-3">Sign Out ↡</button>  
+    <button className="p-2 m-1 mt-3 text-red-800 bg-white rounded-lg hover:bg-red-800 hover:text-white">
+      GPT Search
+    </button>
+    
+    <button onClick={handleSignOut} className="text-red-800 p-2 m-1 mt-3 bg-white mx-3 rounded-lg hover:bg-red-800 hover:text-white">Sign Out</button>  
+    <img className="w-12 h-12 mt-2" src={user.photoURL} alt="" />
     </div>}
     </div>
   );
