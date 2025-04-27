@@ -4,7 +4,7 @@ const GPTMovieSuggestions = () => {
 
     return (
         <div>
-            
+            Movies Suggested
             
         </div>
     )
