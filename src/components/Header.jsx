@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { addUser, removeUser } from "../utils/userSlice";
+import { toggleGptSearchView } from "../utils/gptSlice";
 
 
 const Header = () => {
@@ -53,6 +54,13 @@ const Header = () => {
    }, [])
 
 
+   const handleGptSearch = () => {
+    // toggle GPT search button
+
+    dispatch(toggleGptSearchView());
+   }
+
+
   return (
     <div className="bg-gradient-to-r from-black to-red-900 flex justify-between relative z-20">
     <h1 className="text-red-600 text-5xl font-extrabold tracking-tight p-4">
@@ -61,12 +69,14 @@ const Header = () => {
     
     {user && 
     <div className="flex p-2">
-    <button className="p-2 m-1 mt-3 text-red-800 bg-white rounded-lg hover:bg-red-800 hover:text-white">
+    <button className="py-2 px-2 mt-5 m-1 text-red-800 bg-white rounded-lg hover:bg-red-800 hover:text-white cursor-pointer"
+    onClick={handleGptSearch}
+    >
       GPT Search
     </button>
     
-    <button onClick={handleSignOut} className="text-red-800 p-2 m-1 mt-3 bg-white mx-3 rounded-lg hover:bg-red-800 hover:text-white">Sign Out</button>  
-    <img className="w-12 h-12 mt-2" src={user.photoURL} alt="" />
+    <button onClick={handleSignOut} className=" text-red-800 px-2 py-2 mt-5 m-1  bg-white mx-3 rounded-lg hover:bg-red-800 hover:text-white cursor-pointer">Sign Out</button>  
+    <img className="w-12 h-12 mt-3" src={user.photoURL} alt="user" />
     </div>}
     </div>
   );
