@@ -13,3 +13,8 @@ export const API_Options = {
 
 
 export const imageCDN_URL = "https://image.tmdb.org/t/p/w200";
+
+
+export const SUPPORTED_LANGUAGES = [
+    {identifier: "en", name: "English"}, {identifier: "hi", name: "Hindi"}, {identifier: "chinese", name: "Chinese"}, {identifier: "japanese", name: "Japanese"}, {identifier: "spanish", name: "Spanish"}
+];

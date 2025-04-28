@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { addUser, removeUser } from "../utils/userSlice";
 import { toggleGptSearchView } from "../utils/gptSlice";
+import { SUPPORTED_LANGUAGES } from "../utils/constants";
+import { changeLanguage } from "../utils/configSlice";
 
 
 const Header = () => {
@@ -61,22 +63,35 @@ const Header = () => {
    }
 
 
+   const handleLanguageChange = (e) => {
+      const {value} = e.target;
+
+      dispatch(changeLanguage(value));
+   }
+
+
   return (
-    <div className="bg-gradient-to-r from-black to-red-900 flex justify-between relative z-20">
+    <div className="bg-gradient-to-r from-black to-gray-900 flex justify-between relative z-20">
     <h1 className="text-red-600 text-5xl font-extrabold tracking-tight p-4">
       NEBULA
     </h1>
     
     {user && 
     <div className="flex p-2">
-    <button className="py-2 px-2 mt-5 m-1 text-red-800 bg-white rounded-lg hover:bg-red-800 hover:text-white cursor-pointer"
+    
+    <select className="text-white py-2 px-2 my-3 m-1 bg-gray-800/70 rounded-sm" onChange={handleLanguageChange}>
+      {SUPPORTED_LANGUAGES.map((l) => <option key={l.identifier} value={l.identifier}>{l.name}</option>)}
+
+    </select>
+
+    <button className="py-2 px-2 my-3 m-1 bg-red-800 text-white rounded-lg hover:bg-red-900 cursor-pointer mx-3"
     onClick={handleGptSearch}
     >
       GPT Search
     </button>
     
-    <button onClick={handleSignOut} className=" text-red-800 px-2 py-2 mt-5 m-1  bg-white mx-3 rounded-lg hover:bg-red-800 hover:text-white cursor-pointer">Sign Out</button>  
-    <img className="w-12 h-12 mt-3" src={user.photoURL} alt="user" />
+    <button onClick={handleSignOut} className=" text-white px-2 py-2 my-3 m-1  bg-red-800 mx-3 rounded-lg hover:bg-red-900 cursor-pointer">Sign Out</button>  
+    <img className="w-12 h-12 my-2" src={user.photoURL} alt="user" />
     </div>}
     </div>
   );
