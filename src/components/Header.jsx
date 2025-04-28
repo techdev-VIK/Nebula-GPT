@@ -1,6 +1,6 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { addUser, removeUser } from "../utils/userSlice";
@@ -15,6 +15,11 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const user = useSelector((store) => store.user);
+  const isGPTSearch = useSelector((store) => store.gpt.showGptSearch);
+
+  const chosenLang = useSelector((store) => store.config.lang);
+
+  console.log(isGPTSearch);
 
   const handleSignOut = () => {
     signOut(auth).then(() => {
@@ -73,21 +78,21 @@ const Header = () => {
   return (
     <div className="bg-gradient-to-r from-black to-gray-900 flex justify-between relative z-20">
     <h1 className="text-red-600 text-5xl font-extrabold tracking-tight p-4">
-      NEBULA
+      <NavLink to="/">NEBULA</NavLink>
     </h1>
     
     {user && 
     <div className="flex p-2">
     
-    <select className="text-white py-2 px-2 my-3 m-1 bg-gray-800/70 rounded-sm" onChange={handleLanguageChange}>
+    {isGPTSearch && <select value={chosenLang} className="text-white py-2 px-2 my-3 m-1 bg-gray-800/70 rounded-sm" onChange={handleLanguageChange}>
       {SUPPORTED_LANGUAGES.map((l) => <option key={l.identifier} value={l.identifier}>{l.name}</option>)}
 
-    </select>
+    </select>}
 
     <button className="py-2 px-2 my-3 m-1 bg-red-800 text-white rounded-lg hover:bg-red-900 cursor-pointer mx-3"
     onClick={handleGptSearch}
     >
-      GPT Search
+      {!isGPTSearch ? "GPT Search" : "Home Page"}
     </button>
     
     <button onClick={handleSignOut} className=" text-white px-2 py-2 my-3 m-1  bg-red-800 mx-3 rounded-lg hover:bg-red-900 cursor-pointer">Sign Out</button>  

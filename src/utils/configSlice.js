@@ -9,7 +9,7 @@ const configSlice = createSlice({
     reducers: {
         changeLanguage: (state, action) => {
             state.lang = action.payload
-        }
+        },
     }
 })
 
