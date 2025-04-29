@@ -46,8 +46,11 @@
 - custom hook for trending movies
 - Fixed the UI issues
 
+- GPT Search Page
+- GPT Search Bar
 - GPT Search button on Header
-
+- Multi-Language feature in app
+- Integrate OpenAI API keys
 
 
 

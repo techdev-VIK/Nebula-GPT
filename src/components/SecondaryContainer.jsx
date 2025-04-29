@@ -5,7 +5,6 @@ const SecondaryContainer = () => {
 
     const movies = useSelector(store => store.movies);
 
-    console.log(movies);
 
     return (
         <div className="bg-black pb-20">

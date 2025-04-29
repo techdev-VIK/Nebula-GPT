@@ -19,7 +19,6 @@ const Header = () => {
 
   const chosenLang = useSelector((store) => store.config.lang);
 
-  console.log(isGPTSearch);
 
   const handleSignOut = () => {
     signOut(auth).then(() => {
@@ -89,13 +88,13 @@ const Header = () => {
 
     </select>}
 
-    <button className="py-2 px-2 my-3 m-1 bg-red-800 text-white rounded-lg hover:bg-red-900 cursor-pointer mx-3"
+    <button className="py-2 px-2 my-3 m-1 bg-red-700 text-white rounded-lg hover:bg-red-900 cursor-pointer mx-3"
     onClick={handleGptSearch}
     >
       {!isGPTSearch ? "GPT Search" : "Home Page"}
     </button>
     
-    <button onClick={handleSignOut} className=" text-white px-2 py-2 my-3 m-1  bg-red-800 mx-3 rounded-lg hover:bg-red-900 cursor-pointer">Sign Out</button>  
+    <button onClick={handleSignOut} className=" text-white px-2 py-2 my-3 m-1  bg-red-700 mx-3 rounded-lg hover:bg-red-900 cursor-pointer">Sign Out</button>  
     <img className="w-12 h-12 my-2" src={user.photoURL} alt="user" />
     </div>}
     </div>

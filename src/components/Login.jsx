@@ -28,8 +28,6 @@ const Login = () => {
     const handleSubmit = (e) => {
 
         e.preventDefault();
-        // console.log(email.current.value);
-        // console.log(password.current.value);
 
         const message = checkValidation(email.current.value, password.current.value);
 
