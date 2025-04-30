@@ -1,8 +1,10 @@
 import { useRef } from "react";
 import { lang } from "../utils/languageConstants";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { GoogleGenAI } from "@google/genai";
+import { API_Options } from "../utils/constants";
+import { addGptMovieResult } from "../utils/gptSlice";
 
 
 const SearchBarGPT = () => {
@@ -10,35 +12,51 @@ const SearchBarGPT = () => {
     const language = useSelector((store) => store.config.lang);
     const searchText = useRef(null);
 
+    const dispatch = useDispatch();
+
     const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY });
 
+    const searchMovie = async(movie) => {
+        try {
+            const data = await fetch("https://api.themoviedb.org/3/search/movie?query=" + movie + "&include_adult=false&language=en-US&page=1", API_Options);
+
+            const json = await data.json();
+
+            return json.results;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     const handleGptSearchClick = async () => {
+
+
         const prompt = searchText.current.value;
-      
-        // const response = await fetch("https://api.openai.com/v1/chat/completions", {
-        //   method: "POST",
-        //   headers: {
-        //     "Authorization": `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`,
-        //     "Content-Type": "application/json"
-        //   },
-        //   body: JSON.stringify({
-        //     model: "gpt-4o",
-        //     messages: [
-        //       { role: "user", content: prompt }
-        //     ]
-        //   })
-        // });
 
-        const response = await ai.models.generateContent({
-            model: "gemini-2.0-flash",
-            contents: "Act as a movie recommendation system and suggest some movies for the query - " + prompt + ". Only give the name of 5 movies, comma separated like the example give. Example: Dhol, Don, Ironman, Batman, Dhamaal.",
-          });
-          console.log(response.text);
+        if(prompt.trim() === "") return;
 
-        
-      
-        // const data = await response.json();
-        // console.log(data.choices);
+        try {
+            const response = await ai.models.generateContent({
+                model: "gemini-2.0-flash",
+                contents: "Act as a movie recommendation system and suggest some movies for the query - " + prompt + ". Only give the name of 5 movies, comma separated like the example give. Example: Dhol,Don,Ironman,Batman,Dhamaal.",
+              });
+              console.log(response.text);
+
+              const gptMovies = response?.text.split(',');
+
+              const promiseData = gptMovies.map((movie) => searchMovie(movie));
+
+              // promiseData => [Promise, Promise, Promise, Promise, Promise]
+
+              const tmdbResults = await Promise.all(promiseData);
+
+              console.log(tmdbResults);
+
+              dispatch(addGptMovieResult({movieNames: gptMovies, movieResults: tmdbResults}));
+
+        } catch (error) {
+            console.error(error);
+        }
       };
 
 
