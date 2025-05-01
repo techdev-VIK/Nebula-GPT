@@ -77,7 +77,7 @@ const Header = () => {
   return (
     <div className="bg-gradient-to-r from-black to-gray-900 flex justify-between relative z-20">
     <h1 className="text-red-600 text-5xl font-extrabold tracking-tight p-4">
-      <NavLink to="/">NEBULA</NavLink>
+      <NavLink to="/">NETFLIX</NavLink>
     </h1>
     
     {user && 
